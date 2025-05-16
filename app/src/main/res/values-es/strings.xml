@@ -3,5 +3,9 @@
 <resources>
     <string name="app_name">AndroidAssignments</string>
     <string name="cristian_hello_message">Hola Mundo!</string>
-    <string name="ButtonText">Soy un boton</string>
+    <string name="button_text">Soy un Boton</string>
+    <string name="login">Inicio de sesión</string>
+    <string name="login_name">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="switch_what_does_this_do">Que hace esto?</string>
 </resources>
