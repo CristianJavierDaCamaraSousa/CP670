@@ -8,4 +8,5 @@
     <string name="login_name">Nombre de usuario</string>
     <string name="password">Contraseña</string>
     <string name="switch_what_does_this_do">Que hace esto?</string>
+    <string name="button_login">Iniciar sesion</string>
 </resources>

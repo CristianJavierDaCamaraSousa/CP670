@@ -6,4 +6,5 @@
     <string name="login_name">Login name</string>
     <string name="password">Password</string>
     <string name="switch_what_does_this_do">What Does This Do?</string>
+    <string name="button_login">Login</string>
 </resources>
