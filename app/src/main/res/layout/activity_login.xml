@@ -16,6 +16,7 @@
         />
 
     <EditText
+        android:id="@+id/text_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
@@ -29,6 +30,7 @@
         />
 
     <EditText
+        android:id="@+id/login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints=""
@@ -41,5 +43,6 @@
         android:layout_height="wrap_content"
         android:text="@string/button_login"
         android:layout_gravity="center_horizontal"
+        android:onClick="loginSaveInfo"
         />
 </LinearLayout>

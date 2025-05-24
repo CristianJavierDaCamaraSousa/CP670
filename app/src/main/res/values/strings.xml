@@ -7,4 +7,13 @@
     <string name="password">Password</string>
     <string name="switch_what_does_this_do">What Does This Do?</string>
     <string name="button_login">Login</string>
+    <string name="snack_password_empty">Password must not be empty</string>
+    <string name="snack_invalid_email">Invalid Email</string>
+    <string name="switch_on">Switch is On</string>
+    <string name="switch_off">Switch is Off</string>
+    <string name="dialog_message">Would you like to finish the activity?</string>
+    <string name="dialog_title">Finish Activity</string>
+    <string name="ok">Yes</string>
+    <string name="cancel">No</string>
+    <string name="here_is_my_response">Here is my response</string>
 </resources>

@@ -17,16 +17,21 @@
     />
 
     <CheckBox
+        android:id="@+id/checkbox"
         android:layout_columnWeight="1"
         android:layout_gravity="fill"
+        android:onClick="onCheckChecked"
         />
     <Switch
+        android:id="@+id/switch_button"
         android:layout_columnWeight="1"
         android:layout_gravity="fill"
         android:text="@string/switch_what_does_this_do"
+        android:onClick="setOnCheckedChanged"
         />
 
     <ImageButton
+        android:id="@+id/button_image"
         android:layout_columnWeight="1"
         android:layout_gravity="fill"
         android:src="@android:drawable/ic_menu_camera" />

@@ -9,4 +9,17 @@
     <string name="password">Contraseña</string>
     <string name="switch_what_does_this_do">Que hace esto?</string>
     <string name="button_login">Iniciar sesion</string>
+    <string name="snack_password_empty">La contraseña no debe ser vacia</string>
+    <string name="snack_invalid_email">El correo no es valido</string>
+
+    <string name="switch_on">Switch esta prendido</string>
+    <string name="switch_off">Switch esta apagado</string>
+
+    <string name="dialog_message">Le gustaría finalizar la actividad?</string>
+    <string name="dialog_title">Terminar Activity</string>
+    <string name="ok">Si</string>
+    <string name="cancel">No</string>
+
+
+    <string name="here_is_my_response">Aquí esta mi respuesta</string>
 </resources>
