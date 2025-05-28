@@ -16,4 +16,6 @@
     <string name="ok">Yes</string>
     <string name="cancel">No</string>
     <string name="here_is_my_response">Here is my response</string>
+    <string name="button_start_chat">Start Chat</string>
+    <string name="button_send_message">SEND</string>
 </resources>

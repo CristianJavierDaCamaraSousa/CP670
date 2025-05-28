@@ -81,4 +81,10 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(this,strMessage, Toast.LENGTH_LONG);
         toast.show();
     }
+
+    public void startChat(View view){
+        Log.i(TAG,"User Clicked Start Chat");
+        Intent intent = new Intent(this, ChatWindow.class);
+        startActivity(intent);
+    }
 }

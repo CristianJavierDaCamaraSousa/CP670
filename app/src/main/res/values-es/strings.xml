@@ -19,7 +19,8 @@
     <string name="dialog_title">Terminar Actividad</string>
     <string name="ok">Si</string>
     <string name="cancel">No</string>
-
-
     <string name="here_is_my_response">Aquí esta mi respuesta</string>
+    <string name="button_start_chat">Empezar Chat</string>
+
+    <string name="button_send_message">ENVIAR</string>
 </resources>

@@ -2,10 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.androidassignments">
-    <uses-permission
-        android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature
-        android:name="android.hardware.camera" android:required="true"/>
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,33 +19,56 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidAssignments"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ChatWindow"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginActivity" />
+        </activity>
         <activity
             android:name=".ListItemsActivity"
-            android:exported="true">
-            <!--<intent-filter>
+            android:exported="true"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginActivity" />
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
-        <!--
-        Window Soft Input Mode added so the snackbar doesn't hide when the keyboard is displayed
-        -->
+        <!--         Window Soft Input Mode added so the snackbar doesn't hide when the keyboard is displayed -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <!--<intent-filter>
+            android:exported="true"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginActivity" />
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
     </application>
+
 </manifest>
