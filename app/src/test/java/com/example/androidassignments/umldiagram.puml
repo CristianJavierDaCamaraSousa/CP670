@@ -1,0 +1,49 @@
+@startuml
+class ChatWindow {
+    - TAG : String
+    - chatInput : EditText
+    - sendButton : Button
+    - chatHistory : List<String>
+    + onCreate(Bundle) : void
+    + sendMessage(View) : void
+    + print(String) : void
+}
+
+class ListItemsActivity {
+    - TAG : String
+    - REQUEST_IMAGE_CAPTURE : int
+    - buttonImage : ImageButton
+    - switch1 : Switch
+    - chkBox : CheckBox
+    + onCreate(Bundle) : void
+    + onActivityResult(int, int, Intent) : void
+    + setOnCheckedChanged(View) : void
+    + onCheckChecked(View) : void
+    + print(String) : void
+}
+
+class LoginActivity {
+    - TAG : String
+    - preferencesFileName : String
+    - preferences : SharedPreferences
+    - loginEmail : EditText
+    - loginPass : EditText
+    - edit : SharedPreferences.Editor
+    + onCreate(Bundle) : void
+    + loginSaveInfo(View) : void
+    + print(String) : void
+}
+
+class MainActivity {
+    - TAG : String
+    - mainButton : Button
+    + onCreate(Bundle) : void
+    + onActivityResult(int, int, Intent) : void
+    + print(String) : void
+    + startChat(View) : void
+}
+
+MainActivity --> ListItemsActivity : "starts"
+MainActivity --> ChatWindow : "starts"
+LoginActivity --> MainActivity : "starts"
+@enduml
