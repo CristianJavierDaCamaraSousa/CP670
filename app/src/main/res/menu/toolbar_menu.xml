@@ -19,4 +19,9 @@
         android:icon="@drawable/pizza"
         android:orderInCategory="101"
         app:showAsAction="always" />
+
+    <item android:id="@+id/menu_about"
+        android:title="About me"
+        android:orderInCategory="104"
+        app:showAsAction="never" />
 </menu>

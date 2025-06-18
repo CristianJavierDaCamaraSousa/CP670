@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -74,6 +75,9 @@ public class TestToolbar extends AppCompatActivity {
             return true;
         } else if (id == R.id.menu_pizza) {
             Log.d("Toolbar", "Option 3 Pizza Selected");
+            return true;
+        } else if(id == R.id.menu_about) {
+            Toast.makeText(this,"Version 1.0, by Cristian Javier Da Camara Sousa", Toast.LENGTH_LONG).show();
             return true;
         } else {
             return super.onOptionsItemSelected(menuItem);
