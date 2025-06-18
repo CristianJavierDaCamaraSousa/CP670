@@ -19,12 +19,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidAssignments"
         tools:targetApi="31">
-
+        <activity
+            android:name=".TestToolbar"
+            android:exported="false"
+            android:theme="@style/Theme.AndroidAssignments">
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
         <activity
             android:name=".ChatWindow"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:parentActivityName=".LoginActivity">
+            android:parentActivityName=".LoginActivity"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
@@ -43,8 +53,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             -->
-        </activity>
-        <!--         Window Soft Input Mode added so the snackbar doesn't hide when the keyboard is displayed -->
+        </activity> <!-- Window Soft Input Mode added so the snackbar doesn't hide when the keyboard is displayed -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
