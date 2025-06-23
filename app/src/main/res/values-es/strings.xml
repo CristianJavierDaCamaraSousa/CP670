@@ -65,4 +65,7 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="snack_message">Mensaje en el snack generico para probar</string>
+    <string name="selected_item_no_1">Usted selecciono item 1 Hamburguesa</string>
+    <string name="go_back">Quieres volver?</string>
 </resources>

@@ -5,19 +5,19 @@
     <item android:id="@+id/menu_hamburger"
         android:title="Hamburguer"
         android:icon="@drawable/hamburger"
-        android:orderInCategory="102"
+        android:orderInCategory="100"
         app:showAsAction="always" />
 
     <item android:id="@+id/menu_hotdog"
         android:title="Hot Dog"
         android:icon="@drawable/hotdog"
-        android:orderInCategory="100"
+        android:orderInCategory="101"
         app:showAsAction="always" />
 
     <item android:id="@+id/menu_pizza"
         android:title="Pizza"
         android:icon="@drawable/pizza"
-        android:orderInCategory="101"
+        android:orderInCategory="102"
         app:showAsAction="always" />
 
     <item android:id="@+id/menu_about"
