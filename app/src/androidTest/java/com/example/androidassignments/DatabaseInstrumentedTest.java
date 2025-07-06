@@ -29,7 +29,7 @@ public class DatabaseInstrumentedTest {
     }
 
     @Test
-    public void testDatabaseCreation() {
+    public void testDBCreation() {
         Context context = ApplicationProvider.getApplicationContext();
         ChatDatabaseHelper dbHelper = new ChatDatabaseHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -40,7 +40,7 @@ public class DatabaseInstrumentedTest {
     }
 
     @Test
-    public void testInsertAndReadMessage() {
+    public void testInsertMessage() {
         // Insert Message
         ContentValues values = new ContentValues();
         String testMessage = "New message";

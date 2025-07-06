@@ -55,7 +55,7 @@ public class ChatWindowInstrumentedTest {
     }
 
     @Test
-    public void testSendMessageUpdatesListView() {
+    public void testSendMessageUpdate() {
         onView(withId(R.id.start_chat_button)).perform(click());
         onView(withId(R.id.editTextChat)).perform(typeText("My name is Cristian"), closeSoftKeyboard());
         onView(withId(R.id.buttonSendChat)).perform(click());
@@ -63,7 +63,7 @@ public class ChatWindowInstrumentedTest {
     }
 
     @Test
-    public void testMessagesPersistOnReopen() {
+    public void testMessagesStillThere() {
         // Send message
         onView(withId(R.id.start_chat_button)).perform(click());
         onView(withId(R.id.editTextChat)).perform(typeText("Message a"), closeSoftKeyboard());
@@ -78,7 +78,7 @@ public class ChatWindowInstrumentedTest {
     }
 
     @Test
-    public void testDatabaseUpgradeClearsMessages() {
+    public void testUpgradeCleanDatabase() {
         // Insert message
         onView(withId(R.id.start_chat_button)).perform(click());
         onView(withId(R.id.editTextChat)).perform(typeText("Message to delete"), closeSoftKeyboard());
