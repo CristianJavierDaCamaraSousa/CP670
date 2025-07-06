@@ -63,7 +63,7 @@ public class ChatWindow extends AppCompatActivity {
         Cursor cur = myDB.rawQuery("SELECT * FROM " + ChatDatabaseHelper.TABLE_NAME,null);
 
 
-        //TODO CHECK LATER
+        //TODO
 
         Log.i(ACTIVITY_NAME, "Cursor’s column count = " + cur.getColumnCount());
         for (int i = 0; i < cur.getColumnCount(); i++) {

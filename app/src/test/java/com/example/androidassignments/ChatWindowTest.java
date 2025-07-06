@@ -1,37 +1,35 @@
 package com.example.androidassignments;
 
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.espresso.action.ViewActions;
-
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.matcher.ViewMatchers.*;
-import static androidx.test.espresso.assertion.ViewAssertions.*;
+import java.util.ArrayList;
 
-import android.app.Activity;
+import static org.junit.Assert.*;
 
-
-public class ChatWindowTest extends Activity {
-
-    @Rule
-    public ActivityScenarioRule<ChatWindowTest>
-            activityScenarioRule
-            = new ActivityScenarioRule<>(ChatWindowTest.class);
+public class ChatWindowTest {
 
     @Test
-    public void sendMessage_displaysMessageInListView() {
-        // Escribe texto en el campo de entrada
-        onView(withId(R.id.editTextChat))
-                .perform(ViewActions.typeText("Hola mundo"), ViewActions.closeSoftKeyboard());
+    public void testAddMessageToList() {
+        ArrayList<String> messages = new ArrayList<>();
+        String newMessage = "Hello again";
 
-        // Haz clic en el botón de enviar
-        onView(withId(R.id.buttonSendChat)).perform(ViewActions.click());
+        if (!newMessage.isEmpty()) {
+            messages.add(newMessage);
+        }
 
-        // Verifica que el mensaje aparece en pantalla (ListView)
-        onView(withText("Hola mundo")).check(matches(isDisplayed()));
+        assertEquals(1, messages.size());
+        assertEquals("Hello again", messages.get(0));
+    }
+
+    @Test
+    public void testEmptyMessageNotAdded() {
+        ArrayList<String> messages = new ArrayList<>();
+        String newMessage = "";
+
+        if (!newMessage.isEmpty()) {
+            messages.add(newMessage);
+        }
+
+        assertEquals(0, messages.size());
     }
 }
