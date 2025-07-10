@@ -64,4 +64,8 @@
     <string name="snack_message">Generic snack message to test</string>
     <string name="selected_item_no_1">You selected item 1 Hamburger</string>
     <string name="go_back">Do you want to go back?</string>
+    <string name="button_weather_forecast">Weather Forecast</string>
+    <string name="current_temperature">Current Temperature</string>
+    <string name="min_temperature">Min Temperature</string>
+    <string name="max_temperature">Max Temperature</string>
 </resources>

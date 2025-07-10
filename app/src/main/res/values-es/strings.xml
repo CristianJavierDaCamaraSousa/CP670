@@ -68,4 +68,8 @@
     <string name="snack_message">Mensaje en el snack generico para probar</string>
     <string name="selected_item_no_1">Usted selecciono item 1 Hamburguesa</string>
     <string name="go_back">Quieres volver?</string>
+    <string name="button_weather_forecast">Previsión meteorológica</string>
+    <string name="current_temperature">Temperatura Actual</string>
+    <string name="min_temperature">Temperatura mínima</string>
+    <string name="max_temperature">Temperatura máxima</string>
 </resources>

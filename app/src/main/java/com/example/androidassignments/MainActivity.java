@@ -93,4 +93,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TestToolbar.class);
         startActivity(intent);
     }
+
+    public void startWeatherForecast(View view){
+        Intent intent = new Intent(this, WeatherForecast.class);
+        startActivity(intent);
+    }
 }
