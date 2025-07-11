@@ -68,4 +68,5 @@
     <string name="current_temperature">Current Temperature</string>
     <string name="min_temperature">Min Temperature</string>
     <string name="max_temperature">Max Temperature</string>
+    <string name="city_text">City</string>
 </resources>

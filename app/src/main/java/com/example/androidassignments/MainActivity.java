@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     Button mainButton;
+
+    Spinner spin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent,10);
             }
         });
+
+        String[] cities = {
+                "Toronto", "Vancouver","Montreal" ,"Ottawa","Calgary", "Regina","Winnipeg", "Edmonton",  "Halifax", "Quebec"
+        };
+
+        spin = findViewById(R.id.cities_canada_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, cities);
+        spin.setAdapter(adapter);
     }
 
     protected void onStart(){
@@ -95,7 +107,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startWeatherForecast(View view){
+        String city = spin.getSelectedItem().toString();
+
         Intent intent = new Intent(this, WeatherForecast.class);
+        intent.putExtra("CITY",city);
         startActivity(intent);
     }
 }
