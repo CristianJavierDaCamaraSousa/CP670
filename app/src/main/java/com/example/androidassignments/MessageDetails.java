@@ -20,5 +20,18 @@ public class MessageDetails extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        if (savedInstanceState == null) {
+            Bundle args = new Bundle();
+            args.putString("message", getIntent().getStringExtra("message"));
+            args.putLong("id", getIntent().getLongExtra("id", -1));
+
+            MessageFragment fragment = new MessageFragment();
+            fragment.setArguments(args);
+
+            getSupportFragmentManager().beginTransaction()
+                    //.replace(R.id.frameLayoutDetails, fragment)
+                    .commit();
+        }
     }
 }

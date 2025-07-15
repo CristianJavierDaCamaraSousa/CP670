@@ -7,6 +7,7 @@
     android:layout_margin="3dp"
     tools:context=".ChatWindow">
 
+
     <EditText
         android:id="@+id/editTextChat"
         android:layout_width="wrap_content"

@@ -2,6 +2,7 @@ package com.example.androidassignments;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -36,6 +37,8 @@ public class ChatWindow extends AppCompatActivity {
     private ChatDatabaseHelper dhHelper;
     private SQLiteDatabase myDB;
     protected Boolean frameLayoutExists=false;
+    private Cursor cur;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class ChatWindow extends AppCompatActivity {
         editTextChat = (EditText) findViewById(R.id.editTextChat);
         buttonSend = (Button) findViewById(R.id.buttonSendChat);
         messages = new ArrayList<>();
-        messageAdapter = new ChatAdapter( this,messages );
+        messageAdapter = new ChatAdapter( this,messages, cur );
         listViewChatWindow.setAdapter(messageAdapter);
 
         /*
@@ -61,7 +64,8 @@ public class ChatWindow extends AppCompatActivity {
         dhHelper = new ChatDatabaseHelper(this);
         myDB = dhHelper.getWritableDatabase();
 
-        Cursor cur = myDB.rawQuery("SELECT * FROM " + ChatDatabaseHelper.TABLE_NAME,null);
+        cur = myDB.rawQuery("SELECT _id, " + ChatDatabaseHelper.KEY_MESSAGE + " FROM " + ChatDatabaseHelper.TABLE_NAME, null);
+
 
 
         //TODO
@@ -82,17 +86,48 @@ public class ChatWindow extends AppCompatActivity {
         }
 
         cur.close();
+        cur = myDB.rawQuery("SELECT _id, " + ChatDatabaseHelper.KEY_MESSAGE + " FROM " + ChatDatabaseHelper.TABLE_NAME, null);
+
+        Log.i(ACTIVITY_NAME, "frameLayoutExists = " + frameLayoutExists);
 
         if(findViewById(R.id.frameLayoutDetails)!=null){
             frameLayoutExists = true;
+            Log.i(ACTIVITY_NAME, "frameLayoutExists = " + frameLayoutExists);
         }
+        listViewChatWindow.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedMessage = messages.get(position);
+            long messageId = id;
+
+            if (frameLayoutExists) {
+                Bundle dataToPass = new Bundle();
+                dataToPass.putString("message", selectedMessage);
+                dataToPass.putLong("id", messageId);
+
+                MessageFragment fragment = new MessageFragment();
+                fragment.setArguments(dataToPass);
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frameLayoutDetails, fragment)
+                        .commit();
+            } else {
+                // 📱 Teléfono: lanzar nueva actividad
+                Intent intent = new Intent(ChatWindow.this, MessageDetails.class);
+                intent.putExtra("message", selectedMessage);
+                intent.putExtra("id", messageId);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private class ChatAdapter extends ArrayAdapter<String>{
         ArrayList<String> messages;
-        public ChatAdapter(@NonNull Context context, ArrayList<String> messages) {
+        private Cursor cur;
+        public ChatAdapter(@NonNull Context context, ArrayList<String> messages, Cursor cur) {
             super(context, 0);
             this.messages = messages;
+            this.cur = cur;
         }
 
         public int getCount(){
@@ -113,6 +148,18 @@ public class ChatWindow extends AppCompatActivity {
             message.setText(getItem(pos));
             return result;
         }
+
+
+        public long getItemId(int position) {
+            Log.i("ChatAdapter", "ID Position position " + position);
+            if (cur != null && cur.moveToPosition(position)) {
+                int idIndex = cur.getColumnIndex("_id");
+                if (idIndex != -1) {
+                    return cur.getLong(idIndex);
+                }
+            }
+            return -1;
+        }
     }
 
 
@@ -130,32 +177,10 @@ public class ChatWindow extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         myDB.close();
     }
-
-    /*
-    *   ContentValues Cvalues = new ContentValues();
-        cValues.put(“FirstName”,  “Abdul-Rahman”);
-        cValues.put(“LastName”,  “Mawlood-Yunis”);
-        cValues.put(“email”,  “amawloodyunis@wlu.ca” );
-
-        dataBaseName.insert(“TableName”, “NullPlaceholder”, cValues)
-        *
-        *
-        *
-        * public Item createItem(Item item) {
-
-            ContentValues values = new ContentValues();
-            values.put(SQLiteHelper.COLUMN_ITEM, item.getItem());
-
-            long insertId = database.insert(SQLiteHelper.TABLE_ITEMS, null,
-                values);
-…
-}
-    *
-    * */
-
 }

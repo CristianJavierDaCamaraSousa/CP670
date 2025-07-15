@@ -1,0 +1,33 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/fragmentMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Message Here"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/fragmentMessageId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID="
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentMessage"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+        android:id="@+id/fragmentDeleteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete this message"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="35dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

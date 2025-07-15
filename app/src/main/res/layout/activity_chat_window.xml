@@ -7,6 +7,7 @@
     android:layout_margin="3dp"
     tools:context=".ChatWindow">
 
+
     <ListView
         android:id="@+id/listViewChatWindow"
         android:layout_width="match_parent"
