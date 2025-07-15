@@ -163,6 +163,7 @@ public class WeatherForecast extends AppCompatActivity {
             return file.exists();
         }
         private Bitmap getImage(String urlStr) {
+
             try {
                 URL url = new URL(urlStr);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -170,6 +171,7 @@ public class WeatherForecast extends AppCompatActivity {
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 return BitmapFactory.decodeStream(input);
+
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
