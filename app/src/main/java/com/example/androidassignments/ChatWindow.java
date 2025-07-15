@@ -35,6 +35,7 @@ public class ChatWindow extends AppCompatActivity {
     ChatAdapter messageAdapter;
     private ChatDatabaseHelper dhHelper;
     private SQLiteDatabase myDB;
+    protected Boolean frameLayoutExists=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +81,11 @@ public class ChatWindow extends AppCompatActivity {
             }
         }
 
-
-
-
-
         cur.close();
 
+        if(findViewById(R.id.frameLayoutDetails)!=null){
+            frameLayoutExists = true;
+        }
     }
 
     private class ChatAdapter extends ArrayAdapter<String>{

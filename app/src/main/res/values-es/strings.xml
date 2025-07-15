@@ -73,4 +73,5 @@
     <string name="min_temperature">Temperatura mínima</string>
     <string name="max_temperature">Temperatura máxima</string>
     <string name="city_text">Ciudad</string>
+    <string name="type_your_message">Escriba su mensaje</string>
 </resources>

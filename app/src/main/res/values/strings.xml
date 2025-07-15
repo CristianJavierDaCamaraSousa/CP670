@@ -69,4 +69,5 @@
     <string name="min_temperature">Min Temperature</string>
     <string name="max_temperature">Max Temperature</string>
     <string name="city_text">City</string>
+    <string name="type_your_message">Type your message</string>
 </resources>

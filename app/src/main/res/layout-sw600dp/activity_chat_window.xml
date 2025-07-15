@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="3dp"
+    tools:context=".ChatWindow">
+
+    <EditText
+        android:id="@+id/editTextChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:hint="@string/type_your_message" />
+
+    <Button
+        android:id="@+id/buttonSendChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/editTextChat"
+        android:onClick="sendMessage"
+        android:text="@string/button_send_message" />
+
+    <ListView
+        android:id="@+id/listViewChatWindow"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_above="@id/editTextChat"
+        android:layout_alignParentTop="true" />
+
+    <FrameLayout
+        android:id="@+id/frameLayoutDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/listViewChatWindow"
+        android:layout_marginStart="8dp" />
+
+</RelativeLayout>
