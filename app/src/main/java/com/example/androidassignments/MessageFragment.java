@@ -34,15 +34,17 @@ public class MessageFragment extends Fragment {
         Button deleteButton = view.findViewById(R.id.fragmentDeleteButton);
 
         msgText.setText(message);
-        idText.setText("ID: " + id);
+        idText.setText("Message Id: " + id);
 
 
         deleteButton.setOnClickListener(v -> {
             Activity activity = getActivity();
-            if (activity instanceof ChatWindow) {
+
+            if (activity instanceof ChatWindow) { //tablet mode
                 ((ChatWindow) activity).deleteMessageById(id);
                 getParentFragmentManager().beginTransaction().remove(this).commit();
-            } else {
+
+            } else { //phone mode
                 Intent intent = new Intent();
                 intent.putExtra("id", id);
                 activity.setResult(Activity.RESULT_OK, intent);

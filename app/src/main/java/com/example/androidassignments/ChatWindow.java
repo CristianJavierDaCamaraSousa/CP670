@@ -84,15 +84,12 @@ public class ChatWindow extends AppCompatActivity {
 
         cur.close();
         cur = myDB.rawQuery("SELECT _id, " + ChatDatabaseHelper.KEY_MESSAGE + " FROM " + ChatDatabaseHelper.TABLE_NAME, null);
-        //messageAdapter = new ChatAdapter(this, cur);
+
         listViewChatWindow.setAdapter(messageAdapter);
 
 
-        Log.i(ACTIVITY_NAME, "frameLayoutExists = " + frameLayoutExists);
-
         if(findViewById(R.id.frameLayoutDetails)!=null){
             frameLayoutExists = true;
-            Log.i(ACTIVITY_NAME, "frameLayoutExists = " + frameLayoutExists);
         }
 
         listViewChatWindow.setOnItemClickListener((parent, view, position, id) -> {
@@ -102,6 +99,7 @@ public class ChatWindow extends AppCompatActivity {
             if (frameLayoutExists) { //tablet layout
 
                 Bundle dataToPass = new Bundle();
+
                 dataToPass.putString("message", selectedMessage);
                 dataToPass.putLong("id", messageId);
 
@@ -131,9 +129,12 @@ public class ChatWindow extends AppCompatActivity {
         public int getCount(){
             return messages.size();
         }
+
         public String getItem(int pos){
             return messages.get(pos);
         }
+
+
         public View getView(int pos, View convertView, ViewGroup parent){
             LayoutInflater inflater = ChatWindow.this.getLayoutInflater();
             View result = null ;
@@ -144,14 +145,15 @@ public class ChatWindow extends AppCompatActivity {
 
             TextView message = (TextView) result.findViewById(R.id.message_text);
             message.setText(getItem(pos));
+
             return result;
         }
 
 
         public long getItemId(int position) {
-            Log.i("ChatAdapter", "ID Position position " + position);
 
             if (cur != null && cur.moveToPosition(position)) {
+
                 int idIndex = cur.getColumnIndex("_id");
 
                 if (idIndex != -1) {
@@ -165,15 +167,24 @@ public class ChatWindow extends AppCompatActivity {
         public View newView(Context context, Cursor cursor, ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(context);
             int position = cursor.getPosition();
-            int layout = (position % 2 == 0) ? R.layout.chat_row_incoming : R.layout.chat_row_outgoing;
-            return inflater.inflate(layout, parent, false);
-        }
+            int layout;
+
+            if (position % 2 == 0) {
+                layout = R.layout.chat_row_incoming;
+            } else {
+                layout = R.layout.chat_row_outgoing;
+            }
+
+            return inflater.inflate(layout, parent, false);        }
 
         @Override
-        public void bindView(View view, Context context, Cursor cursor) {
+        public void bindView(View view, Context context, Cursor cursor){
+
             TextView messageText = view.findViewById(R.id.message_text);
             String message = cursor.getString(cursor.getColumnIndexOrThrow(ChatDatabaseHelper.KEY_MESSAGE));
+
             messageText.setText(message);
+
         }
     }
 
@@ -185,10 +196,11 @@ public class ChatWindow extends AppCompatActivity {
         String newMessage = editTextChat.getText().toString();
         if(!newMessage.isEmpty()){
             messages.add(newMessage);
-            messageAdapter.notifyDataSetChanged(); //this restarts the process of getCount()/getView()
+            messageAdapter.notifyDataSetChanged(); //this restarts getCount() and getView()
             editTextChat.setText("");
             cValues.put(ChatDatabaseHelper.KEY_MESSAGE,newMessage);
             myDB.insert(ChatDatabaseHelper.TABLE_NAME,null,cValues);
+
             refreshCursor();
         }
     }
@@ -201,20 +213,23 @@ public class ChatWindow extends AppCompatActivity {
     }
 
     public void deleteMessageById(long id) {
-        Log.i(ACTIVITY_NAME, "deleteMessageById called with id: " + id);
-        int rowsDeleted = myDB.delete(ChatDatabaseHelper.TABLE_NAME, "_id = ?", new String[]{String.valueOf(id)});
+        int rowsDeleted = myDB.delete(ChatDatabaseHelper.TABLE_NAME, "_id = ?", new String[] {String.valueOf(id)});
+
         if (rowsDeleted > 0) {
-            Log.i(ACTIVITY_NAME, "Message with id " + id + " deleted successfully.");
+
+
             for (int i = 0; i < messages.size(); i++) {
                 if (messageAdapter.getItemId(i) == id) {
                     messages.remove(i);
-                    messageAdapter.notifyDataSetChanged();
+
+                    messageAdapter.notifyDataSetChanged(); //this restarts getCount() and getView()
                     refreshCursor();
                     break;
                 }
             }
         } else {
-            Log.w(ACTIVITY_NAME, "No message found with id: " + id);
+
+            Log.w(ACTIVITY_NAME, "This id wasnnt' found");
         }
     }
 
@@ -224,9 +239,10 @@ public class ChatWindow extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            long idToDelete = data.getLongExtra("id", -1);
-            if (idToDelete != -1) {
-                deleteMessageById(idToDelete);
+
+            long dleteId = data.getLongExtra("id", -1);
+            if (dleteId != -1) {
+                deleteMessageById(dleteId);
             }
         }
     }
@@ -234,6 +250,7 @@ public class ChatWindow extends AppCompatActivity {
     private void refreshCursor() {
         Cursor newCursor = myDB.rawQuery("SELECT _id, " + ChatDatabaseHelper.KEY_MESSAGE + " FROM " + ChatDatabaseHelper.TABLE_NAME, null);
         messageAdapter.changeCursor(newCursor);
+
         cur = newCursor;
     }
 
