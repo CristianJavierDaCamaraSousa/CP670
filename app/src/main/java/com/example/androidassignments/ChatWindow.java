@@ -123,11 +123,9 @@ public class ChatWindow extends AppCompatActivity {
 
     private class ChatAdapter extends ArrayAdapter<String>{
         ArrayList<String> messages;
-        private Cursor cur;
         public ChatAdapter(@NonNull Context context, ArrayList<String> messages, Cursor cur) {
             super(context, 0);
             this.messages = messages;
-            this.cur = cur;
         }
 
         public int getCount(){
