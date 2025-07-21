@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +18,11 @@ import android.app.Activity;
 
 public class MessageFragment extends Fragment {
 
-    private ChatWindow parentActivity;
-
     public MessageFragment() {
-        // Necesario para reconstrucción automática
-    }
-
-    public MessageFragment(ChatWindow activity) {
-        parentActivity = activity;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_message_details, container, false);
 
         Bundle args = getArguments();
@@ -43,21 +36,24 @@ public class MessageFragment extends Fragment {
         msgText.setText(message);
         idText.setText("ID: " + id);
 
+
         deleteButton.setOnClickListener(v -> {
-            if (parentActivity != null) {
-                //parentActivity.deleteMessageById(id);
+            Activity activity = getActivity();
+            if (activity instanceof ChatWindow) {
+                ((ChatWindow) activity).deleteMessageById(id);
                 getParentFragmentManager().beginTransaction().remove(this).commit();
             } else {
                 Intent intent = new Intent();
                 intent.putExtra("id", id);
-                getActivity().setResult(Activity.RESULT_OK, intent);
-                getActivity().finish();
+                activity.setResult(Activity.RESULT_OK, intent);
+                activity.finish();
             }
-
         });
 
         return view;
     }
+
+
 
 
 }

@@ -16,7 +16,7 @@ public class MessageDetails extends AppCompatActivity {
 
         Bundle dataToPass = getIntent().getExtras();
 
-        MessageFragment fragment = new MessageFragment(null);
+        MessageFragment fragment = new MessageFragment();
         fragment.setArguments(dataToPass);
 
         getSupportFragmentManager()

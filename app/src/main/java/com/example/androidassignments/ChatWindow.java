@@ -31,7 +31,7 @@ public class ChatWindow extends AppCompatActivity {
     private static final String ACTIVITY_NAME = "ChatWindow" ;
     ListView listViewChatWindow;
     EditText editTextChat;
-    Button buttonSend;
+    Button buttonSend, buttonDelete;
     ArrayList<String> messages;
     ChatAdapter messageAdapter;
     private ChatDatabaseHelper dhHelper;
@@ -67,9 +67,6 @@ public class ChatWindow extends AppCompatActivity {
         cur = myDB.rawQuery("SELECT _id, " + ChatDatabaseHelper.KEY_MESSAGE + " FROM " + ChatDatabaseHelper.TABLE_NAME, null);
 
 
-
-        //TODO
-
         Log.i(ACTIVITY_NAME, "Cursor’s column count = " + cur.getColumnCount());
         for (int i = 0; i < cur.getColumnCount(); i++) {
             Log.i(ACTIVITY_NAME, "Column name: " + cur.getColumnName(i));
@@ -94,6 +91,7 @@ public class ChatWindow extends AppCompatActivity {
             frameLayoutExists = true;
             Log.i(ACTIVITY_NAME, "frameLayoutExists = " + frameLayoutExists);
         }
+
         listViewChatWindow.setOnItemClickListener((parent, view, position, id) -> {
             String selectedMessage = messages.get(position);
             long messageId = id;
@@ -115,10 +113,9 @@ public class ChatWindow extends AppCompatActivity {
                 Intent intent = new Intent(ChatWindow.this, MessageDetails.class);
                 intent.putExtra("message", selectedMessage);
                 intent.putExtra("id", messageId);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
-
     }
 
     private class ChatAdapter extends ArrayAdapter<String>{
@@ -183,4 +180,34 @@ public class ChatWindow extends AppCompatActivity {
         super.onDestroy();
         myDB.close();
     }
+
+    public void deleteMessageById(long id) {
+        Log.i(ACTIVITY_NAME, "deleteMessageById called with id: " + id);
+        int rowsDeleted = myDB.delete(ChatDatabaseHelper.TABLE_NAME, "_id = ?", new String[]{String.valueOf(id)});
+        if (rowsDeleted > 0) {
+            Log.i(ACTIVITY_NAME, "Message with id " + id + " deleted successfully.");
+            for (int i = 0; i < messages.size(); i++) {
+                if (messageAdapter.getItemId(i) == id) {
+                    messages.remove(i);
+                    messageAdapter.notifyDataSetChanged();
+                    break;
+                }
+            }
+        } else {
+            Log.w(ACTIVITY_NAME, "No message found with id: " + id);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            long idToDelete = data.getLongExtra("id", -1);
+            if (idToDelete != -1) {
+                deleteMessageById(idToDelete);
+            }
+        }
+    }
+
 }
