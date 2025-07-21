@@ -58,8 +58,8 @@ public class ChatWindow extends AppCompatActivity {
         listViewChatWindow.setAdapter(messageAdapter);
 
         /*
-        * DataBase
-        * */
+         * DataBase
+         * */
 
         dhHelper = new ChatDatabaseHelper(this);
         myDB = dhHelper.getWritableDatabase();
@@ -84,6 +84,9 @@ public class ChatWindow extends AppCompatActivity {
 
         cur.close();
         cur = myDB.rawQuery("SELECT _id, " + ChatDatabaseHelper.KEY_MESSAGE + " FROM " + ChatDatabaseHelper.TABLE_NAME, null);
+        //messageAdapter = new ChatAdapter(this, cur);
+        listViewChatWindow.setAdapter(messageAdapter);
+
 
         Log.i(ACTIVITY_NAME, "frameLayoutExists = " + frameLayoutExists);
 
@@ -118,10 +121,10 @@ public class ChatWindow extends AppCompatActivity {
         });
     }
 
-    private class ChatAdapter extends ArrayAdapter<String>{
+    private class ChatAdapter extends android.widget.CursorAdapter{
         ArrayList<String> messages;
         public ChatAdapter(@NonNull Context context, ArrayList<String> messages, Cursor cur) {
-            super(context, 0);
+            super(context, cur,0);
             this.messages = messages;
         }
 
@@ -157,6 +160,21 @@ public class ChatWindow extends AppCompatActivity {
             }
             return -1;
         }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            int position = cursor.getPosition();
+            int layout = (position % 2 == 0) ? R.layout.chat_row_incoming : R.layout.chat_row_outgoing;
+            return inflater.inflate(layout, parent, false);
+        }
+
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            TextView messageText = view.findViewById(R.id.message_text);
+            String message = cursor.getString(cursor.getColumnIndexOrThrow(ChatDatabaseHelper.KEY_MESSAGE));
+            messageText.setText(message);
+        }
     }
 
 
@@ -171,6 +189,7 @@ public class ChatWindow extends AppCompatActivity {
             editTextChat.setText("");
             cValues.put(ChatDatabaseHelper.KEY_MESSAGE,newMessage);
             myDB.insert(ChatDatabaseHelper.TABLE_NAME,null,cValues);
+            refreshCursor();
         }
     }
 
@@ -190,6 +209,7 @@ public class ChatWindow extends AppCompatActivity {
                 if (messageAdapter.getItemId(i) == id) {
                     messages.remove(i);
                     messageAdapter.notifyDataSetChanged();
+                    refreshCursor();
                     break;
                 }
             }
@@ -200,6 +220,7 @@ public class ChatWindow extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
@@ -208,6 +229,12 @@ public class ChatWindow extends AppCompatActivity {
                 deleteMessageById(idToDelete);
             }
         }
+    }
+
+    private void refreshCursor() {
+        Cursor newCursor = myDB.rawQuery("SELECT _id, " + ChatDatabaseHelper.KEY_MESSAGE + " FROM " + ChatDatabaseHelper.TABLE_NAME, null);
+        messageAdapter.changeCursor(newCursor);
+        cur = newCursor;
     }
 
 }
