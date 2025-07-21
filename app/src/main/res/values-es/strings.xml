@@ -75,4 +75,5 @@
     <string name="city_text">Ciudad</string>
     <string name="type_your_message">Escriba su mensaje</string>
     <string name="delete_this_message">Borrar este mensaje!</string>
+    <string name="hello_blank_fragment">Hola fragment vacio</string>
 </resources>
