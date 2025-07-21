@@ -98,7 +98,8 @@ public class ChatWindow extends AppCompatActivity {
             String selectedMessage = messages.get(position);
             long messageId = id;
 
-            if (frameLayoutExists) {
+            if (frameLayoutExists) { //tablet layout
+
                 Bundle dataToPass = new Bundle();
                 dataToPass.putString("message", selectedMessage);
                 dataToPass.putLong("id", messageId);
@@ -106,12 +107,11 @@ public class ChatWindow extends AppCompatActivity {
                 MessageFragment fragment = new MessageFragment();
                 fragment.setArguments(dataToPass);
 
-                getSupportFragmentManager()
-                        .beginTransaction()
+                getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frameLayoutDetails, fragment)
                         .commit();
-            } else {
-                // 📱 Teléfono: lanzar nueva actividad
+            } else { //phone layout
+
                 Intent intent = new Intent(ChatWindow.this, MessageDetails.class);
                 intent.putExtra("message", selectedMessage);
                 intent.putExtra("id", messageId);
@@ -150,8 +150,10 @@ public class ChatWindow extends AppCompatActivity {
 
         public long getItemId(int position) {
             Log.i("ChatAdapter", "ID Position position " + position);
+
             if (cur != null && cur.moveToPosition(position)) {
                 int idIndex = cur.getColumnIndex("_id");
+
                 if (idIndex != -1) {
                     return cur.getLong(idIndex);
                 }
